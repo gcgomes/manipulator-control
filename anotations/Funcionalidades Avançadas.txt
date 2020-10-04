@@ -1,0 +1,42 @@
+Validações Backend
+> npm install celebrate
+
+Tests Backend
+TDD (Test-driven Development)
+Primeiro é criado os testes, depois os códigos, o teste funciona como
+um guia para o programador e valida as regras de negócio
+> npm install jest -D
+> npx jest --init (yes, node, no, yes)
+-Tipos de testes
+    - Unitários: Testa um pedaço da aplicação de forma isolada, não mexe
+                 com banco de dados, não chama uma outra API, sem side effects
+    - Integração: Testam um fluxo de rota ou funcionalidade inteira da aplicação
+                  diferente dos unitários, possuem side effects.
+Para executar os testes
+> npm test
+
+Cria uma variável ambiente pra diferenciar ambientes (produção, teste, desenvolvimento)
+> npm install cross-env
+
+Para requisições da api
+> npm install supertest -D
+
+Para setar header com o supertest, utiliza-se a função set().
+
+Deploy Backend
+Aplicação de teste para mostrar para os amigos
+> HerokuApp - Tem plano gratuito, vídeo da Rocketseat sobre como hospedar.
+> Digital Ocean - Servidor comercial, tem a precificação excelente e previsível, vídeo da Rocketseat sobre como hospedar. (Masterclass #03)
+> AWS (Amazon Web Service), GCP (Google Cloud Plataform), MA (Microsoft Azure) - Aplicações comerciais com escala gigante
+
+Deploy Frontend
+> Netlify - Aplicações pra teste e pequenas, tem plano gratuito, específico para frontend
+
+Mobile
+> Gerar apk com expo - Vídeo da Rocketseat Core/Drops #15
+
+Estudos Futuros
+Padrão de código ESLint - Vídeo no YT da RS
+Padrão de código Prettier - Vídeo no YT da RS
+Autenticação JWT - Vídeo no YT da RS
+Styled Componets - Vídeo no YT da RS

@@ -1,0 +1,12 @@
+Aplicação Be the Hero
+
+Primeiros passos para o Noje.js
+Instalar chocolatey (package manager)
+Instalar nodejs lts com chocolatey
+Instalar npm (project package manager)
+
+Instalar VSCode ou Jetbrains WebStorm (IDE)
+
+Criar projeto, criar pasta backend
+Rodar npm init -y
+Rodar npm install express (Dependência para gerenciamento de rotas)

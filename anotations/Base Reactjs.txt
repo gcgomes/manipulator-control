@@ -1,0 +1,39 @@
+Abordagem tradicional front-end
+O servidor retorna todos conteúdo HTML e CSS da página a cada requisição.
+Limita o front-end para o browser e não pode ser aplicado no mobile.
+
+Abordagem SPA (Single-Page Application)
+O servidor retorna somente os dados como resposta a cada requisição,
+cabe ao front-end preencher as informações em tela
+A página não recarrega otimizando a performance toda a comunicação é feita por JSON
+
+Criando projeto react
+> npx create-react-app "directory"
+> npm start
+
+HTMl no arquivo JS é conhecido como JSX (JavaScript e XML)
+
+Componentes
+São funções JS que armazenam códigos JSX que serão inseridos no projeto
+
+Propriedades
+O React aceita encapsulamento de códigos conhecido como propriedades.
+- Se cria um arquivo importando o react e exportando uma função "Exemplo"
+- No arquivo base a função cria é importada e é possível ser chamada utilizando
+  a estrutura DOM <Exemplo />
+É possível passar parâmetros para as função através de atributos DOM, o parâmetro
+children é padrão e pode ser chamado quando inserido como innerHTML
+
+Estados
+São variáveis que são utilizadas no React, é necessário utilizar o useState,
+esse método retorna Array [valor, funcaodeAtualizacao]
+
+Imutabilidade
+Não é possível manipular o valor do estado de forma direta, é necessário
+utilizar a funcaoDeAtualizacao do useState
+
+Imports
+
+> npm install react-icons
+> npm install react-router-dom
+> npm install axios

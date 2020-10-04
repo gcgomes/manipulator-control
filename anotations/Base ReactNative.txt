@@ -1,0 +1,28 @@
+Abordagem tradicional Mobile
+Criamos uma aplicação pra iOS e outra para Android, repetindo 
+o trabalho durante a criação e para as alterações do projeto.
+
+Abordagem React Native
+Todos código é feito em JS, o código não é convertido para código nativo,
+o dispositivo entende o código em JS e a interface é totalmente nativa.
+Utiliza um framework chamado JSCore que dá o entendimento do JS pro OS Mobile.
+
+Expo
+Framework para ReactNative para utilizar as funcionalidades do celular,
+como Camera, Mapa, GeoLocalização, etc... O expo é instalado em nosso
+celular e ele já possui tudo que é necessário para o desenvolvimento
+
+Estilização
+- Os componentes são padronizados com display flex (flexbox)
+- As propriedades são em camelCase e os valores não numéricos possuem aspas simples
+- Não existe herança de estilos, os elementos devem ter uma estilização própria
+
+> npm install -g expo-cli
+> expo init "directory"
+> yarn start
+> npm install @react-navigation/native
+> expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+> npm install @react-navigation/stack
+> npm install expo-constants
+> expo install expo-mail-composer
+> npm install axios
