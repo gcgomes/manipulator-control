@@ -4,13 +4,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 const AppStack = createStackNavigator();
 
-import Incidents from "./pages/incidents";
+import Main from "./pages/main";
 
 export default function Routes() {
   return (
     <NavigationContainer>
       <AppStack.Navigator screenOptions={{ headerShown: false }}>
-        <AppStack.Screen name="Incidents" component={Incidents}/>
+        <AppStack.Screen name="Main" component={Main}/>
       </AppStack.Navigator>
     </NavigationContainer>
   );

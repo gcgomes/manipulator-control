@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Be The Hero",
-    "slug": "bethehero",
+    "name": "Controle de manipuladores",
+    "slug": "manipulator-control",
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": [
