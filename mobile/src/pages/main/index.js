@@ -23,38 +23,73 @@ export default function Main() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={logoImg}/>
-        <Text style={styles.headerText}>
-          Total de <Text style={styles.headerTextBold}>0 casos</Text>.
-        </Text>
       </View>
 
-      <Text style={styles.title}>Bem-vindo!</Text>
-      <Text style={styles.description}>Escolha um dos casos abaixo e salve o dia.</Text>
+      <View style={styles.sliderView}>
+        <Text style={styles.description}>Ombro {shoulder}</Text>
 
-      <Slider
-        style={styles.slider}
-        step={1}
-        maximumValue={255}
-        value={0}
-        onValueChange={ val => setShoulder(val) }
-        onSlidingComplete={ moveArm }
-      />
+        <View style={{borderRadius: 50, overflow: 'hidden'}}>
+          <View style={{flexDirection: 'row', position: 'absolute'}}>
+            <View style={{...styles.sliderDummy, width: (shoulder/50) * 300}}/>
+            <View style={styles.sliderReal}/>
+          </View>
 
-      <Slider
-        step={1}
-        maximumValue={255}
-        value={0}
-        onValueChange={ val => setElbow(val) }
-        onSlidingComplete={ moveArm }
-      />
+          <Slider
+            style={{width: 300, height: 30, borderRadius: 50}}
+            minimumValue={0}
+            maximumValue={100}
+            value={shoulder}
+            onValueChange={val => setShoulder(val) }
+            minimumTrackTintColor='transparent'
+            maximumTrackTintColor='transparent'
+            thumbTintColor='transparent'
+          />
+        </View>
+      </View>
 
-      <Slider
-        step={1}
-        maximumValue={255}
-        value={0}
-        onValueChange={ val => setPulse(val) }
-        onSlidingComplete={ moveArm }
-      />
+      <View style={styles.sliderView}>
+        <Text style={styles.description}>Cotovelo {elbow}</Text>
+
+        <View style={{borderRadius: 50, overflow: 'hidden'}}>
+          <View style={{flexDirection: 'row', position: 'absolute'}}>
+            <View style={{...styles.sliderDummy, width: (elbow/50) * 300}}/>
+            <View style={styles.sliderReal}/>
+          </View>
+
+          <Slider
+            style={{width: 300, height: 30, borderRadius: 50}}
+            minimumValue={0}
+            maximumValue={100}
+            value={elbow}
+            onValueChange={val => setElbow(val) }
+            minimumTrackTintColor='transparent'
+            maximumTrackTintColor='transparent'
+            thumbTintColor='transparent'
+          />
+        </View>
+      </View>
+
+      <View style={styles.sliderView}>
+        <Text style={styles.description}>Pulso {pulse}</Text>
+
+        <View style={{borderRadius: 50, overflow: 'hidden'}}>
+          <View style={{flexDirection: 'row', position: 'absolute'}}>
+            <View style={{...styles.sliderDummy, width: (pulse/50) * 300}}/>
+            <View style={styles.sliderReal}/>
+          </View>
+
+          <Slider
+            style={{width: 300, height: 30, borderRadius: 50}}
+            minimumValue={0}
+            maximumValue={100}
+            value={pulse}
+            onValueChange={val => setPulse(val) }
+            minimumTrackTintColor='transparent'
+            maximumTrackTintColor='transparent'
+            thumbTintColor='transparent'
+          />
+        </View>
+      </View>
     </View>
   );
 };

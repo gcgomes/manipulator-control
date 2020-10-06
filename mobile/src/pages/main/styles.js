@@ -10,25 +10,8 @@ export default StyleSheet.create({
 
   header: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'center',
     alignItems: 'center',
-  },
-
-  headerText: {
-    fontSize: 15,
-    color: '#737380',
-  },
-
-  headerTextBold: {
-    fontWeight: 'bold',
-  },
-
-  title: {
-    fontSize: 30,
-    marginBottom: 16,
-    marginTop: 48,
-    color: '#13131a',
-    fontWeight: 'bold',
   },
 
   description: {
@@ -37,8 +20,25 @@ export default StyleSheet.create({
     color: '#737380',
   },
 
-  slider: {
-    marginTop: 10,
-    color: '#000000'
+  sliderView: {
+    marginTop: 80,
   },
+
+  slider: {
+    color: '#000000',
+    fontSize: 30,
+  },
+
+  sliderDummy: {
+    backgroundColor: '#119EC2',
+    width: 300,
+    height:30,
+    borderRadius: 50,
+    position: 'absolute',
+  },
+
+  sliderReal: {
+    backgroundColor: '#119EC2',
+    height:30,
+  }
 });
