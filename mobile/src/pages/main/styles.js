@@ -25,8 +25,7 @@ export default StyleSheet.create({
   },
 
   slider: {
-    color: '#000000',
-    fontSize: 30,
+    color: '#119EC2',
   },
 
   sliderDummy: {
