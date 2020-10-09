@@ -16,7 +16,7 @@ export default function Main() {
   const [grab, setGrab] = useState(false);
 
   async function moveArm() {
-    await api.post('/mover-braco', {shoulder, elbow, pulse, grab});
+    await api.post('/mover-braco', {shoulder, elbow, pulse});
   }
 
   return (
