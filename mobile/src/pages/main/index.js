@@ -10,9 +10,9 @@ import logoImg from '../../assets/logo.png';
 import styles from './styles';
 
 export default function Main() {
-  const [shoulder, setShoulder] = useState(0);
-  const [elbow, setElbow] = useState(0);
-  const [pulse, setPulse] = useState(0);
+  const [shoulder, setShoulder] = useState(1);
+  const [elbow, setElbow] = useState(1);
+  const [pulse, setPulse] = useState(1);
   const [grab, setGrab] = useState(false);
 
   async function moveArm() {
