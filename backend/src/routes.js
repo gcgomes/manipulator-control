@@ -13,4 +13,6 @@ routes.post('/mover-braco', celebrate({
   }),
 }), ArmController.move);
 
+routes.get('/agarrar', ArmController.grab);
+
 module.exports = routes;
