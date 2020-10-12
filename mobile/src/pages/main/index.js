@@ -10,8 +10,8 @@ import styles from './styles';
 
 export default function Main() {
   const [shoulder, setShoulder] = useState(90);
-  const [elbow, setElbow] = useState(1);
-  const [pulse, setPulse] = useState(1);
+  const [elbow, setElbow] = useState(90);
+  const [pulse, setPulse] = useState(90);
   const [grab, setGrab] = useState(false);
 
   function moveArm() {
@@ -25,7 +25,7 @@ export default function Main() {
       </View>
 
       <View style={styles.sliderView}>
-        <Text style={styles.description}>Ombro {}</Text>
+        <Text style={styles.description}>Ombro</Text>
 
         <View style={{borderRadius: 50, overflow: 'hidden'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
@@ -52,14 +52,14 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (elbow/100) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (elbow/180) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={1}
-            maximumValue={100}
+            minimumValue={0}
+            maximumValue={180}
             value={elbow}
             onValueChange={val => setElbow(val) }
             onSlidingComplete={moveArm}
@@ -75,14 +75,14 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (pulse/100) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (pulse/180) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={1}
-            maximumValue={100}
+            minimumValue={0}
+            maximumValue={180}
             value={pulse}
             onValueChange={val => setPulse(val) }
             onSlidingComplete={moveArm}

@@ -35,7 +35,7 @@ board.on('ready', function() {
     });
 
     grabServo = new arduino.Servo({
-        pin: 11,
+        pin: 6,
         type: "standard",
         range: [0, 180],
         fps: 100,
@@ -62,11 +62,6 @@ board.on('ready', function() {
 });
 
 function toggleGrab() {
-    if (!isReady) {
-        console.log('Erro!');
-        return;
-    }
-
     if (isOn) {
         grabServo.to(180);
         isOn = false;
@@ -78,13 +73,19 @@ function toggleGrab() {
 
 module.exports = {
     move(request, response) {
+        if (!isReady) return;
+
         const {shoulder, elbow, pulse} = request.body;
 
         shoulderServo.to(shoulder, Math.abs(shoulderServo.last.degrees - shoulder) > 75 ? 500 : 250);
         elbowServo.to(elbow, Math.abs(elbowServo.last.degrees - elbow) > 75 ? 500 : 250);
         pulseServo.to(pulse, Math.abs(pulseServo.last.degrees - pulse) > 75 ? 500 : 250);
+
+        // console.log({shoulder, elbow, pulse});
     },
     grab(request, response) {
+        if (!isReady) return;
+
         toggleGrab();
     }
 };
