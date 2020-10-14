@@ -3,6 +3,7 @@ const arduino = require('johnny-five');
 
 let board = new arduino.Board();
 let isReady = false;
+let isRunning = false;
 let isOn = false;
 let shoulderServo;
 let elbowServo;
@@ -37,9 +38,10 @@ board.on('ready', function() {
     grabServo = new arduino.Servo({
         pin: 6,
         type: "standard",
-        range: [0, 180],
+        range: [60, 90],
         fps: 100,
-        center: true,
+        inverse: true,
+        startAt: 60,
     });
 
     board.repl.inject({
@@ -63,29 +65,81 @@ board.on('ready', function() {
 
 function toggleGrab() {
     if (isOn) {
-        grabServo.to(180);
+        grabServo.min();
         isOn = false;
     } else {
-        grabServo.to(0);
+        grabServo.max();
         isOn = true;
     }
 }
 
+function moveArm(shoulder, elbow, pulse) {
+    pulseServo.to(pulse, Math.abs(pulseServo.last.degrees - pulse) > 75 ? 500 : 250);
+    elbowServo.to(elbow, Math.abs(elbowServo.last.degrees - elbow) > 75 ? 500 : 250);
+    shoulderServo.to(shoulder, Math.abs(shoulderServo.last.degrees - shoulder) > 75 ? 500 : 250);
+}
+
 module.exports = {
     move(request, response) {
-        if (!isReady) return;
+        if (!isReady || isRunning) return;
 
         const {shoulder, elbow, pulse} = request.body;
 
-        shoulderServo.to(shoulder, Math.abs(shoulderServo.last.degrees - shoulder) > 75 ? 500 : 250);
-        elbowServo.to(elbow, Math.abs(elbowServo.last.degrees - elbow) > 75 ? 500 : 250);
-        pulseServo.to(pulse, Math.abs(pulseServo.last.degrees - pulse) > 75 ? 500 : 250);
+        moveArm(shoulder, elbow, pulse);
 
-        // console.log({shoulder, elbow, pulse});
+        response.status(200).send();
     },
     grab(request, response) {
-        if (!isReady) return;
+        if (!isReady || isRunning) return;
 
         toggleGrab();
-    }
+
+        response.status(200).send();
+    },
+    async savePosition1(request, response) {
+        if (!isReady || isRunning) return;
+
+        const {shoulder, elbow, pulse} = request.body;
+
+        await connection('positions').insert({
+            'id': 1,
+            shoulder,
+            elbow,
+            pulse
+        });
+
+        response.status(200).send();
+    },
+    async savePosition2(request, response) {
+        if (!isReady || isRunning) return;
+
+        const {shoulder, elbow, pulse} = request.body;
+
+        await connection('positions').insert({
+            'id': 2,
+            shoulder,
+            elbow,
+            pulse
+        });
+
+        response.status(200).send();
+    },
+    play(request, response) {
+        if (!isReady || isRunning) return;
+
+        isRunning = true;
+
+        // while(isRunning) {
+        //     moveArm();
+        // }
+
+        response.status(200).send();
+    },
+    stop(request, response) {
+        if (!isReady) return;
+
+        isRunning = false;
+
+        response.status(200).send();
+    },
 };

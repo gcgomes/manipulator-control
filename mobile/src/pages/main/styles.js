@@ -21,7 +21,7 @@ export default StyleSheet.create({
   },
 
   sliderView: {
-    marginTop: 80,
+    marginTop: 60,
   },
 
   slider: {
@@ -39,5 +39,26 @@ export default StyleSheet.create({
   sliderReal: {
     backgroundColor: '#119EC2',
     height:30,
+  },
+
+  actions: {
+    marginTop: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+
+  action: {
+    backgroundColor: '#119EC2',
+    borderRadius: 8,
+    height: 50,
+    width: '48%',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+
+  actionText: {
+    color: 'white',
+    fontSize: 15,
+    fontWeight: 'bold'
   }
 });

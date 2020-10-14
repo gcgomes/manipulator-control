@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-// import {Feather} from '@expo/vector-icons';
-import {View, Image, Text, Slider} from 'react-native';
+import React, {useState} from 'react';
+import {View, Image, Text, Slider, TouchableOpacity} from 'react-native';
 
 import api from "../../services/api";
 
@@ -12,10 +11,29 @@ export default function Main() {
   const [shoulder, setShoulder] = useState(90);
   const [elbow, setElbow] = useState(90);
   const [pulse, setPulse] = useState(90);
-  const [grab, setGrab] = useState(false);
 
   function moveArm() {
     api.post('/mover-braco', {shoulder, elbow, pulse});
+  }
+
+  function grab() {
+    api.get('/agarrar');
+  }
+
+  function play() {
+    api.get('/rodar');
+  }
+
+  function stop() {
+    api.get('/parar');
+  }
+
+  async function savePosition1() {
+    await api.post('/salvar-posicao-1', {shoulder, elbow, pulse});
+  }
+
+  async function savePosition2() {
+    await api.post('/salvar-posicao-2', {shoulder, elbow, pulse});
   }
 
   return (
@@ -35,7 +53,7 @@ export default function Main() {
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={0}
+            minimumValue={1}
             maximumValue={180}
             value={shoulder}
             onValueChange={val => setShoulder(val) }
@@ -58,7 +76,7 @@ export default function Main() {
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={0}
+            minimumValue={1}
             maximumValue={180}
             value={elbow}
             onValueChange={val => setElbow(val) }
@@ -81,7 +99,7 @@ export default function Main() {
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={0}
+            minimumValue={1}
             maximumValue={180}
             value={pulse}
             onValueChange={val => setPulse(val) }
@@ -91,6 +109,30 @@ export default function Main() {
             thumbTintColor='transparent'
           />
         </View>
+      </View>
+
+      <View style={{...styles.actions, justifyContent: 'center'}}>
+        <TouchableOpacity style={styles.action} onPress={grab}>
+          <Text style={styles.actionText}>Agarrar</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.actions}>
+        <TouchableOpacity style={styles.action} onPress={savePosition1}>
+          <Text style={styles.actionText}>Salvar 1</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.action} onPress={savePosition2}>
+          <Text style={styles.actionText}>Salvar 2</Text>
+        </TouchableOpacity>
+      </View>
+
+      <View style={styles.actions}>
+        <TouchableOpacity style={styles.action} onPress={play}>
+          <Text style={styles.actionText}>Rodar</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={styles.action} onPress={stop}>
+          <Text style={styles.actionText}>Parar</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
