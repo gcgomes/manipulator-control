@@ -20,8 +20,8 @@ export default function Main() {
     api.get('/agarrar');
   }
 
-  function play() {
-    api.get('/rodar');
+  async function play() {
+    await api.get('/rodar');
   }
 
   function stop() {

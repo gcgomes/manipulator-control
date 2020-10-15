@@ -73,19 +73,15 @@ function toggleGrab() {
     }
 }
 
-function moveArm(shoulder, elbow, pulse) {
-    pulseServo.to(pulse, Math.abs(pulseServo.last.degrees - pulse) > 75 ? 500 : 250);
-    elbowServo.to(elbow, Math.abs(elbowServo.last.degrees - elbow) > 75 ? 500 : 250);
-    shoulderServo.to(shoulder, Math.abs(shoulderServo.last.degrees - shoulder) > 75 ? 500 : 250);
-}
-
 module.exports = {
     move(request, response) {
         if (!isReady || isRunning) return;
 
         const {shoulder, elbow, pulse} = request.body;
 
-        moveArm(shoulder, elbow, pulse);
+        pulseServo.to(pulse, Math.abs(pulseServo.last.degrees - pulse) > 75 ? 500 : 250);
+        elbowServo.to(elbow, Math.abs(elbowServo.last.degrees - elbow) > 75 ? 500 : 250);
+        shoulderServo.to(shoulder, Math.abs(shoulderServo.last.degrees - shoulder) > 75 ? 500 : 250);
 
         response.status(200).send();
     },
@@ -124,14 +120,28 @@ module.exports = {
 
         response.status(200).send();
     },
-    play(request, response) {
+    async play(request, response) {
         if (!isReady || isRunning) return;
 
         isRunning = true;
 
-        // while(isRunning) {
-        //     moveArm();
-        // }
+        const point1 = await knex('positions').where('id', 1).select('points.*');
+        if (!point1) return;
+
+        const point2 = await knex('positions').where('id', 2).select('points.*');
+        if (!point2) return;
+
+        while(!isRunning) {
+            pulseServo.to(point1.pulse, Math.abs(pulseServo.last.degrees - point1.pulse) > 75 ? 500 : 250);
+            elbowServo.to(point1.elbow, Math.abs(elbowServo.last.degrees - point1.elbow) > 75 ? 500 : 250);
+            shoulderServo.to(point1.shoulder, Math.abs(shoulderServo.last.degrees - point1.shoulder) > 75 ? 500 : 250);
+            toggleGrab();
+            await delay(1000);
+            pulseServo.to(point2.pulse, Math.abs(pulseServo.last.degrees - point2.pulse) > 75 ? 500 : 250);
+            elbowServo.to(point2.elbow, Math.abs(elbowServo.last.degrees - point2.elbow) > 75 ? 500 : 250);
+            shoulderServo.to(point2.shoulder, Math.abs(shoulderServo.last.degrees - point2.shoulder) > 75 ? 500 : 250);
+            toggleGrab();
+        }
 
         response.status(200).send();
     },
