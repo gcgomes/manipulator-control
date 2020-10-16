@@ -75,7 +75,7 @@ function toggleGrab() {
 
 module.exports = {
     move(request, response) {
-        if (!isReady || isRunning) return;
+        if (!isReady || isRunning) return response.status(404).send();
 
         const {shoulder, elbow, pulse} = request.body;
 
@@ -86,14 +86,14 @@ module.exports = {
         response.status(200).send();
     },
     grab(request, response) {
-        if (!isReady || isRunning) return;
+        if (!isReady || isRunning) return response.status(404).send();
 
         toggleGrab();
 
         response.status(200).send();
     },
     async savePosition1(request, response) {
-        if (!isReady || isRunning) return;
+        if (!isReady || isRunning) return response.status(404).send();
 
         const {shoulder, elbow, pulse} = request.body;
 
@@ -107,7 +107,7 @@ module.exports = {
         response.status(200).send();
     },
     async savePosition2(request, response) {
-        if (!isReady || isRunning) return;
+        if (!isReady || isRunning) return response.status(404).send();
 
         const {shoulder, elbow, pulse} = request.body;
 
@@ -121,32 +121,31 @@ module.exports = {
         response.status(200).send();
     },
     async play(request, response) {
-        if (!isReady || isRunning) return;
+        if (!isReady || isRunning) return response.status(404).send();
+
+        const point1 = await connection('positions').where('id', 1).first();
+        if (!point1) return response.status(204).send();
+
+        const point2 = await connection('positions').where('id', 2).first();
+        if (!point2) return response.status(204).send();
 
         isRunning = true;
 
-        const point1 = await knex('positions').where('id', 1).select('points.*');
-        if (!point1) return;
+        response.status(200).send();
 
-        const point2 = await knex('positions').where('id', 2).select('points.*');
-        if (!point2) return;
-
-        while(!isRunning) {
-            pulseServo.to(point1.pulse, Math.abs(pulseServo.last.degrees - point1.pulse) > 75 ? 500 : 250);
-            elbowServo.to(point1.elbow, Math.abs(elbowServo.last.degrees - point1.elbow) > 75 ? 500 : 250);
+        while(isRunning) {
             shoulderServo.to(point1.shoulder, Math.abs(shoulderServo.last.degrees - point1.shoulder) > 75 ? 500 : 250);
+            elbowServo.to(point1.elbow, Math.abs(elbowServo.last.degrees - point1.elbow) > 75 ? 500 : 250);
+            pulseServo.to(point1.pulse, Math.abs(pulseServo.last.degrees - point1.pulse) > 75 ? 500 : 250);
             toggleGrab();
-            await delay(1000);
             pulseServo.to(point2.pulse, Math.abs(pulseServo.last.degrees - point2.pulse) > 75 ? 500 : 250);
             elbowServo.to(point2.elbow, Math.abs(elbowServo.last.degrees - point2.elbow) > 75 ? 500 : 250);
             shoulderServo.to(point2.shoulder, Math.abs(shoulderServo.last.degrees - point2.shoulder) > 75 ? 500 : 250);
             toggleGrab();
         }
-
-        response.status(200).send();
     },
     stop(request, response) {
-        if (!isReady) return;
+        if (!isReady) return response.status(404).send();
 
         isRunning = false;
 
