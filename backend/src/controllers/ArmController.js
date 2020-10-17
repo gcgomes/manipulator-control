@@ -9,6 +9,8 @@ let shoulderServo;
 let elbowServo;
 let pulseServo;
 let grabServo;
+let runFunction;
+const timeout = 1000;
 
 board.on('ready', function() {
     shoulderServo = new arduino.Servo({
@@ -24,7 +26,7 @@ board.on('ready', function() {
         type: "standard",
         range: [0, 180],
         fps: 100,
-        center: true,
+        startAt: 150,
     });
 
     pulseServo = new arduino.Servo({
@@ -131,23 +133,61 @@ module.exports = {
 
         isRunning = true;
 
-        response.status(200).send();
+        shoulderServo.to(point1.shoulder, timeout);
+        setTimeout(function() {
+            elbowServo.to(point1.elbow, timeout);
+        }, 1000);
+        setTimeout(function() {
+            pulseServo.to(point1.pulse, timeout);
+        }, 2000);
+        setTimeout(function() {
+            toggleGrab();
+        }, 3000);
+        setTimeout(function() {
+            pulseServo.to(point2.pulse, timeout);
+        }, 4000);
+        setTimeout(function() {
+            elbowServo.to(point2.elbow, timeout);
+        }, 5000);
+        setTimeout(function() {
+            shoulderServo.to(point2.shoulder, timeout);
+        }, 6000);
+        setTimeout(function() {
+            toggleGrab();
+        }, 7000);
 
-        while(isRunning) {
-            shoulderServo.to(point1.shoulder, Math.abs(shoulderServo.last.degrees - point1.shoulder) > 75 ? 500 : 250);
-            elbowServo.to(point1.elbow, Math.abs(elbowServo.last.degrees - point1.elbow) > 75 ? 500 : 250);
-            pulseServo.to(point1.pulse, Math.abs(pulseServo.last.degrees - point1.pulse) > 75 ? 500 : 250);
-            toggleGrab();
-            pulseServo.to(point2.pulse, Math.abs(pulseServo.last.degrees - point2.pulse) > 75 ? 500 : 250);
-            elbowServo.to(point2.elbow, Math.abs(elbowServo.last.degrees - point2.elbow) > 75 ? 500 : 250);
-            shoulderServo.to(point2.shoulder, Math.abs(shoulderServo.last.degrees - point2.shoulder) > 75 ? 500 : 250);
-            toggleGrab();
-        }
+        runFunction = setInterval(() => {
+            shoulderServo.to(point1.shoulder, timeout);
+            setTimeout(function() {
+                elbowServo.to(point1.elbow, timeout);
+            }, 1000);
+            setTimeout(function() {
+                pulseServo.to(point1.pulse, timeout);
+            }, 2000);
+            setTimeout(function() {
+                toggleGrab();
+            }, 3500);
+            setTimeout(function() {
+                pulseServo.to(point2.pulse, timeout);
+            }, 4000);
+            setTimeout(function() {
+                elbowServo.to(point2.elbow, timeout);
+            }, 5000);
+            setTimeout(function() {
+                shoulderServo.to(point2.shoulder, timeout);
+            }, 6000);
+            setTimeout(function() {
+                toggleGrab();
+            }, 7500);
+        }, 8000);
+
+        response.status(200).send();
     },
     stop(request, response) {
         if (!isReady) return response.status(404).send();
 
         isRunning = false;
+        clearInterval(runFunction);
 
         response.status(200).send();
     },
