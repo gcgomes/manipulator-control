@@ -67,10 +67,10 @@ board.on('ready', function() {
 
 function toggleGrab() {
     if (isOn) {
-        grabServo.min();
+        grabServo.to(60, 500);
         isOn = false;
     } else {
-        grabServo.max();
+        grabServo.to(90, 500);
         isOn = true;
     }
 }
@@ -142,7 +142,7 @@ module.exports = {
         }, 2000);
         setTimeout(function() {
             toggleGrab();
-        }, 3000);
+        }, 3500);
         setTimeout(function() {
             pulseServo.to(point2.pulse, timeout);
         }, 4000);
@@ -154,7 +154,7 @@ module.exports = {
         }, 6000);
         setTimeout(function() {
             toggleGrab();
-        }, 7000);
+        }, 7500);
 
         runFunction = setInterval(() => {
             shoulderServo.to(point1.shoulder, timeout);
@@ -179,7 +179,7 @@ module.exports = {
             setTimeout(function() {
                 toggleGrab();
             }, 7500);
-        }, 8000);
+        }, 9000);
 
         response.status(200).send();
     },
