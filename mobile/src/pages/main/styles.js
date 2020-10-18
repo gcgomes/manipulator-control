@@ -9,9 +9,16 @@ export default StyleSheet.create({
   },
 
   header: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+
+  headerText: {
+    fontSize: 20,
+    lineHeight: 24,
+    color: '#737380',
+    marginTop: 15,
   },
 
   description: {
@@ -21,7 +28,7 @@ export default StyleSheet.create({
   },
 
   sliderView: {
-    marginTop: 60,
+    marginTop: 30,
   },
 
   slider: {
@@ -48,7 +55,7 @@ export default StyleSheet.create({
   },
 
   action: {
-    backgroundColor: '#119EC2',
+    backgroundColor: '#0084A9',
     borderRadius: 8,
     height: 50,
     width: '48%',

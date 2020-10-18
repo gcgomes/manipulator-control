@@ -9,7 +9,7 @@ import styles from './styles';
 
 export default function Main() {
   const [shoulder, setShoulder] = useState(90);
-  const [elbow, setElbow] = useState(90);
+  const [elbow, setElbow] = useState(150);
   const [pulse, setPulse] = useState(90);
 
   function moveArm() {
@@ -40,12 +40,13 @@ export default function Main() {
     <View style={styles.container}>
       <View style={styles.header}>
         <Image source={logoImg}/>
+        <Text style={styles.headerText}>Controle de manipulador</Text>
       </View>
 
       <View style={styles.sliderView}>
         <Text style={styles.description}>Ombro</Text>
 
-        <View style={{borderRadius: 50, overflow: 'hidden'}}>
+        <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
             <View style={{...styles.sliderDummy, width: (shoulder/180) * 300}}/>
             <View style={styles.sliderReal}/>
@@ -68,7 +69,7 @@ export default function Main() {
       <View style={styles.sliderView}>
         <Text style={styles.description}>Cotovelo</Text>
 
-        <View style={{borderRadius: 50, overflow: 'hidden'}}>
+        <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
             <View style={{...styles.sliderDummy, width: (elbow/180) * 300}}/>
             <View style={styles.sliderReal}/>
@@ -91,7 +92,7 @@ export default function Main() {
       <View style={styles.sliderView}>
         <Text style={styles.description}>Pulso</Text>
 
-        <View style={{borderRadius: 50, overflow: 'hidden'}}>
+        <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
             <View style={{...styles.sliderDummy, width: (pulse/180) * 300}}/>
             <View style={styles.sliderReal}/>
@@ -111,26 +112,26 @@ export default function Main() {
         </View>
       </View>
 
-      <View style={{...styles.actions, justifyContent: 'center'}}>
-        <TouchableOpacity style={styles.action} onPress={grab}>
+      <View style={{...styles.actions, marginTop: 30, justifyContent: 'center'}}>
+        <TouchableOpacity style={{...styles.action,  backgroundColor: '#119EC2'}} onPress={grab}>
           <Text style={styles.actionText}>Agarrar</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.actions}>
         <TouchableOpacity style={styles.action} onPress={savePosition1}>
-          <Text style={styles.actionText}>Salvar 1</Text>
+          <Text style={styles.actionText}>Salvar Posição 1</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.action} onPress={savePosition2}>
-          <Text style={styles.actionText}>Salvar 2</Text>
+          <Text style={styles.actionText}>Salvar Posição 2</Text>
         </TouchableOpacity>
       </View>
 
       <View style={styles.actions}>
-        <TouchableOpacity style={styles.action} onPress={play}>
-          <Text style={styles.actionText}>Rodar</Text>
+        <TouchableOpacity style={{...styles.action,  backgroundColor: '#28a745'}} onPress={play}>
+          <Text style={styles.actionText}>Iniciar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.action} onPress={stop}>
+        <TouchableOpacity style={{...styles.action,  backgroundColor: '#dc3545'}} onPress={stop}>
           <Text style={styles.actionText}>Parar</Text>
         </TouchableOpacity>
       </View>
