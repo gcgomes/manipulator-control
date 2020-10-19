@@ -99,7 +99,7 @@ module.exports = {
 
         const {shoulder, elbow, pulse} = request.body;
 
-        await connection('positions').insert({
+        await connection('positions').update({
             'id': 1,
             shoulder,
             elbow,
@@ -113,7 +113,7 @@ module.exports = {
 
         const {shoulder, elbow, pulse} = request.body;
 
-        await connection('positions').insert({
+        await connection('positions').update({
             'id': 2,
             shoulder,
             elbow,
