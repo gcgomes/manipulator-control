@@ -13,6 +13,15 @@ let runFunction;
 const timeout = 1000;
 
 board.on('ready', function() {
+    grabServo = new arduino.Servo({
+        pin: 6,
+        type: "standard",
+        range: [60, 90],
+        fps: 100,
+        inverse: true,
+        startAt: 60,
+    });
+
     shoulderServo = new arduino.Servo({
         pin: 9,
         type: "standard",
@@ -35,15 +44,6 @@ board.on('ready', function() {
         range: [0, 180],
         fps: 100,
         center: true,
-    });
-
-    grabServo = new arduino.Servo({
-        pin: 6,
-        type: "standard",
-        range: [60, 90],
-        fps: 100,
-        inverse: true,
-        startAt: 60,
     });
 
     board.repl.inject({
@@ -99,12 +99,9 @@ module.exports = {
 
         const {shoulder, elbow, pulse} = request.body;
 
-        await connection('positions').update({
-            'id': 1,
-            shoulder,
-            elbow,
-            pulse
-        });
+        await connection('positions')
+          .where('id', '=', 1)
+          .update({shoulder, elbow, pulse});
 
         response.status(200).send();
     },
@@ -113,12 +110,9 @@ module.exports = {
 
         const {shoulder, elbow, pulse} = request.body;
 
-        await connection('positions').update({
-            'id': 2,
-            shoulder,
-            elbow,
-            pulse
-        });
+        await connection('positions')
+          .where('id', '=', 2)
+          .update({shoulder, elbow, pulse});
 
         response.status(200).send();
     },
