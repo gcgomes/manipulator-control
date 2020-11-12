@@ -9,7 +9,7 @@ import styles from './styles';
 
 export default function Main() {
   const [shoulder, setShoulder] = useState(90);
-  const [elbow, setElbow] = useState(150);
+  const [elbow, setElbow] = useState(75);
   const [pulse, setPulse] = useState(90);
 
   function moveArm() {

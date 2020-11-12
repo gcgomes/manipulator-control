@@ -13,15 +13,6 @@ let runFunction;
 const timeout = 1000;
 
 board.on('ready', function() {
-    grabServo = new arduino.Servo({
-        pin: 6,
-        type: "standard",
-        range: [60, 90],
-        fps: 100,
-        inverse: true,
-        startAt: 60,
-    });
-
     shoulderServo = new arduino.Servo({
         pin: 9,
         type: "standard",
@@ -33,9 +24,9 @@ board.on('ready', function() {
     elbowServo = new arduino.Servo({
         pin: 10,
         type: "standard",
-        range: [0, 180],
+        range: [20, 165],
         fps: 100,
-        startAt: 150,
+        startAt: 75,
     });
 
     pulseServo = new arduino.Servo({
@@ -44,6 +35,15 @@ board.on('ready', function() {
         range: [0, 180],
         fps: 100,
         center: true,
+    });
+
+    grabServo = new arduino.Servo({
+        pin: 6,
+        type: "standard",
+        range: [45, 85],
+        fps: 100,
+        inverse: true,
+        startAt: 30,
     });
 
     board.repl.inject({
@@ -67,10 +67,10 @@ board.on('ready', function() {
 
 function toggleGrab() {
     if (isOn) {
-        grabServo.to(60, 500);
+        grabServo.to(45, 500);
         isOn = false;
     } else {
-        grabServo.to(90, 500);
+        grabServo.to(85, 500);
         isOn = true;
     }
 }
