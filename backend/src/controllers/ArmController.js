@@ -1,7 +1,7 @@
 const connection = require('../database/connection');
 const arduino = require('johnny-five');
 
-let board = new arduino.Board();
+let board = new arduino.Board({ port: "COM3" });
 let isReady = false;
 let isRunning = false;
 let isOn = false;
