@@ -9,7 +9,7 @@ import styles from './styles';
 
 export default function Main() {
   const [shoulder, setShoulder] = useState(90);
-  const [elbow, setElbow] = useState(75);
+  const [elbow, setElbow] = useState(90);
   const [pulse, setPulse] = useState(90);
 
   function moveArm() {
@@ -48,13 +48,13 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (shoulder/180) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (shoulder/135) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={1}
+            minimumValue={0}
             maximumValue={180}
             value={shoulder}
             onValueChange={val => setShoulder(val) }
@@ -71,13 +71,13 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (elbow/180) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (elbow/135) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={1}
+            minimumValue={0}
             maximumValue={180}
             value={elbow}
             onValueChange={val => setElbow(val) }
@@ -94,13 +94,13 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (pulse/180) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (pulse/135) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
           <Slider
             style={{width: 300, height: 30, borderRadius: 50}}
-            minimumValue={1}
+            minimumValue={0}
             maximumValue={180}
             value={pulse}
             onValueChange={val => setPulse(val) }

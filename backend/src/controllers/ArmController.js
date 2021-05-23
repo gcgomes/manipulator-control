@@ -18,15 +18,15 @@ board.on('ready', function() {
         type: "standard",
         range: [0, 180],
         fps: 100,
-        center: true,
+        startAt: 90,
     });
 
     elbowServo = new arduino.Servo({
         pin: 10,
         type: "standard",
-        range: [20, 165],
+        range: [0, 180],
         fps: 100,
-        startAt: 75,
+        startAt: 90,
     });
 
     pulseServo = new arduino.Servo({
@@ -34,7 +34,7 @@ board.on('ready', function() {
         type: "standard",
         range: [0, 180],
         fps: 100,
-        center: true,
+        startAt: 90,
     });
 
     grabServo = new arduino.Servo({
@@ -43,7 +43,7 @@ board.on('ready', function() {
         range: [45, 85],
         fps: 100,
         inverse: true,
-        startAt: 30,
+        startAt: 85,
     });
 
     board.repl.inject({
