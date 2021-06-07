@@ -4,7 +4,7 @@ const arduino = require('johnny-five');
 let board = new arduino.Board({ port: "COM3" });
 let isReady = false;
 let isRunning = false;
-let isOn = false;
+let isOn = true;
 let shoulderServo;
 let elbowServo;
 let pulseServo;
@@ -16,7 +16,7 @@ board.on('ready', function() {
     shoulderServo = new arduino.Servo({
         pin: 9,
         type: "standard",
-        range: [0, 180],
+        invert: true,
         fps: 100,
         startAt: 90,
     });
@@ -24,7 +24,7 @@ board.on('ready', function() {
     elbowServo = new arduino.Servo({
         pin: 10,
         type: "standard",
-        range: [0, 180],
+        invert: true,
         fps: 100,
         startAt: 90,
     });
@@ -32,7 +32,7 @@ board.on('ready', function() {
     pulseServo = new arduino.Servo({
         pin: 11,
         type: "standard",
-        range: [0, 180],
+        invert: true,
         fps: 100,
         startAt: 90,
     });

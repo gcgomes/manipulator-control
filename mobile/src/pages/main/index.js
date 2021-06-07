@@ -48,7 +48,7 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (shoulder/135) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (shoulder/180) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
@@ -71,7 +71,7 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (elbow/135) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (elbow/180) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
@@ -94,7 +94,7 @@ export default function Main() {
 
         <View style={{borderRadius: 50, overflow: 'hidden', borderWidth: 1, 'borderColor': '#737380'}}>
           <View style={{flexDirection: 'row', position: 'absolute'}}>
-            <View style={{...styles.sliderDummy, width: (pulse/135) * 300}}/>
+            <View style={{...styles.sliderDummy, width: (pulse/180) * 300}}/>
             <View style={styles.sliderReal}/>
           </View>
 
